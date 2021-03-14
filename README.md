@@ -17,7 +17,7 @@
 
 
 
-### [Presentation](https://docs.google.com/presentation/d/1PyAJR_y1FyYsqHI7L2BLXPIXdpIWquZlToZ7kp64aHo/edit#slide=id.g8794a74c9d_0_48)
+### [Presentation](https://docs.google.com/presentation/d/1PyAJR_y1FyYsqHI7L2BLXPIXdpIWquZlToZ7kp64aHo/edit?usp=sharing)
 
 
 ### [Server-side](https://github.com/Lilly7777/GRobot---Server)
