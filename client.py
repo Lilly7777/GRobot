@@ -52,8 +52,7 @@ def take_action(command, power):
                 stop()
 
         if command == "PICKUP":
-                #TODO
-                pass
+                pickup()
         moveable = True
 
 
