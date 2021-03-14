@@ -13,6 +13,12 @@ R_MOTOR_2 = 6
 L_MOTOR_1 = 25 
 L_MOTOR_2 = 17 
 
+L_SERVO = 12
+R_SERVO = 13
+
+GPIO.setup(L_SERVO, GPIO.OUT)
+GPIO.setup(R_SERVO, GPIO.OUT)
+
 GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(ECHO, GPIO.IN)
 GPIO.setup(TRIG_2, GPIO.OUT)
@@ -21,6 +27,10 @@ GPIO.setup(R_MOTOR_1, GPIO.OUT)
 GPIO.setup(R_MOTOR_2, GPIO.OUT)
 GPIO.setup(L_MOTOR_1, GPIO.OUT)
 GPIO.setup(L_MOTOR_2, GPIO.OUT)
+
+
+l_pwm=GPIO.PWM(L_SERVO, 50)
+r_pwm=GPIO.PWM(R_SERVO, 50)
 
 isMoved = False
 
@@ -74,6 +84,31 @@ def stop():
                 GPIO.output(L_MOTOR_2, GPIO.LOW)
                 isMoved = False
 
+def set_angle(pin, angle, pwm_):
+	duty = angle / 18 + 2
+	GPIO.output(pin, True)
+	pwm_.ChangeDutyCycle(duty)
+	time.sleep(1)
+	GPIO.output(pin, False)
+	pwm_.ChangeDutyCycle(0)
+
+def pickup():
+    for i in range(180, 0, -1):
+        set_angle(R_SERVO, i, r_pwm)
+        set_angle(L_SERVO, 180 - i, l_pwm)
+        time.sleep(0.03)
+
+    time.sleep(5)
+
+    for i in range(0, 180, +1):
+        set_angle(R_SERVO, i, r_pwm)
+        set_angle(L_SERVO, 180 - i, l_pwm)
+        time.sleep(0.03)   
+
+
+
+                
+
 if __name__ == "__main__":  
         try:
                 while True:
@@ -121,4 +156,3 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
                 print("Cleaning up!")
                 GPIO.cleanup()
-
